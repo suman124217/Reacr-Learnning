@@ -1,28 +1,40 @@
-import { useState } from 'react'; 
-import withLoading from './withloading.jsx';
-import UserList from './userlist.jsx';
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import Navbar from "./Navbar";
+import  "./navbar.css";
+import myImage from "./assets/myImage.png";
 
-const UserListWithLoading = withLoading(UserList);
-
-function App() { 
-  const [isLoading, setIsLoading] = useState(true);
-
-  const users = ['Ram', 'Amit', 'Rahul', 'Priya'];
-
+function Home() {
   return (
-    <div style={{ padding: '20px', borderRadius: '10px', maxWidth: '400px', margin: '20px auto' }}>
-      <h2>ReactJS Higher-Order Component Example</h2>
-      
-      <button 
-        onClick={() => setIsLoading(!isLoading)} 
-        style={{ padding: '8px 16px', cursor: 'pointer', marginBottom: '15px' }}
-      >
-        [Toggle Loading]
-      </button>
-
-      <UserListWithLoading isLoading={isLoading} users={users} />
-    </div>
+    <Link to="/new">
+      <img src={myImage} alt="New page" />    
+    </Link>
   );
 }
 
-export default App;
+function About() {
+  return <h1>Welcome to About</h1>;
+}
+
+function Contact() {
+  return <h1>Welcome to Contact</h1>;
+}
+
+function New() {
+  return <h2>Welcome to new page</h2>;
+}
+function App() {
+  return (
+    <BrowserRouter>
+      <Navbar />
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/new" element={<New />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+export default App;    
